@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: ./backend
+    user: "${UID:-1000}:${GID:-1000}"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/sousveiller.db
+      - CORS_ORIGINS=http://192.168.1.77:3000
+      
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NUXT_PUBLIC_API_BASE=http://localhost:8000/api
+    depends_on:
+      - backend
+    restart: unless-stopped

@@ -1,0 +1,1 @@
+docker compose exec -u root -w /app backend python -m pytest tests/ -v
