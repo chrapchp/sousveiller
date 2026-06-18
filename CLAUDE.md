@@ -178,3 +178,79 @@ Do not implement unless explicitly asked:
 - Heatmaps or analytics
 - Production TLS / deployment
 - Multi-unit ESP32 support
+
+### File Header Requirements
+
+All source files must include a standard header comment at the very top, before any imports or code.
+
+### Standard Format
+
+**C/C++ (`.h`, `.cpp`)**
+```cpp
+/***************************************************
+ * Project:     <project name>
+ * Author:      <author name>
+ * Date:        <yyyyMMMdd>
+ * History:     <yyyyMMMdd> - Initial creation
+ ***************************************************/
+```
+
+**TypeScript / JavaScript (`.ts`, `.tsx`, `.js`)**
+```ts
+/***************************************************
+ * Project:     <project name>
+ * Author:      <author name>
+ * Date:        <yyyyMMMdd>
+ * History:     <yyyyMMMdd> - Initial creation
+ ***************************************************/
+```
+
+**Python (`.py`)**
+```python
+###################################################
+# Project:     <project name>
+# Author:      <author name>
+# Date:        <yyyyMMMdd>
+# History:     <yyyyMMMdd> - Initial creation
+###################################################
+```
+
+**Vue (`.vue`)** — place before the first `<template>` tag
+```vue
+<!--*************************************************
+ * Project:     <project name>
+ * Author:      <author name>
+ * Date:        <yyyyMMMdd>
+ * History:     <yyyyMMMdd> - Initial creation
+ *************************************************-->
+```
+
+**CSS (`.css`)** — global stylesheets only, not scoped component styles
+```css
+/***************************************************
+ * Project:     <project name>
+ * Author:      <author name>
+ * Date:        <yyyyMMMdd>
+ * History:     <yyyyMMMdd> - Initial creation
+ ***************************************************/
+```
+
+### Rules
+- Every new file must include the header at the top.
+- Date format is `yyyyMMMdd` with month as 3-letter abbreviation, e.g. `2026Jun17`.
+- `Date` is the original creation date and never changes.
+- `History` first entry matches `Date` with the description `Initial creation`.
+- When modifying an existing file, append a new `History` line with the current date and a brief description of the change.
+- Do not remove or reorder existing `History` entries.
+- Infer `Project` from the repository or workspace name if available, otherwise leave as a placeholder.
+- Infer `Author` from the git config (`user.name`) if available, otherwise leave as a placeholder.
+- Do not add headers to scoped `<style>` blocks inside `.vue` files.
+
+### Enforcement
+- Before writing any file changes, always update the header first.
+- **New file** — generate the full header using the standard format before writing any code.
+- **Modified file** — check if a compliant header exists at the top of the file:
+  - If missing, add the full header before proceeding.
+  - If present, append a new `History` line with the current date and a brief description of the change made.
+- **Never** modify the `Project`, `Author`, or `Date` fields on existing files.
+- **Never** remove or reorder existing `History` entries.
